@@ -2,8 +2,10 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import './App.css'
 import { Butterfly, type ButterflySpec } from './components/Butterfly'
 import { ForegroundStem } from './components/ForegroundStem'
+import { SaveTheDate } from './components/SaveTheDate'
 
 const TRANSITION_DURATION_MS = 4400
+const SCROLL_UNLOCK_DELAY_MS = 3000
 const FLORAL_ASSET_PATH = '/assets/watercolor-floral-border.webp'
 const MIN_DESKTOP_BUTTERFLIES = 256
 const MIN_MOBILE_BUTTERFLIES = 128
@@ -204,8 +206,21 @@ type Phase = 'waiting' | 'departing' | 'open'
 function App() {
   const [phase, setPhase] = useState<Phase>('waiting')
   const [assetsReady, setAssetsReady] = useState(false)
+  const [scrollReady, setScrollReady] = useState(false)
   const destinationHeadingRef = useRef<HTMLHeadingElement>(null)
+  const saveDateRef = useRef<HTMLElement>(null)
   const butterflies = useButterflyScatter()
+
+  useEffect(() => {
+    const previousScrollRestoration = window.history.scrollRestoration
+
+    window.history.scrollRestoration = 'manual'
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+
+    return () => {
+      window.history.scrollRestoration = previousScrollRestoration
+    }
+  }, [])
 
   const openInvitation = useCallback(() => {
     if (!assetsReady) return
@@ -261,8 +276,33 @@ function App() {
     return () => window.cancelAnimationFrame(frame)
   }, [phase])
 
+  useEffect(() => {
+    if (phase !== 'open') return
+
+    const timer = window.setTimeout(() => {
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+      setScrollReady(true)
+    }, SCROLL_UNLOCK_DELAY_MS)
+
+    return () => window.clearTimeout(timer)
+  }, [phase])
+
+  useEffect(() => {
+    document.documentElement.classList.toggle('is-scroll-ready', scrollReady)
+
+    return () => {
+      document.documentElement.classList.remove('is-scroll-ready')
+    }
+  }, [scrollReady])
+
+  const scrollToInvitation = useCallback(() => {
+    saveDateRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }, [])
+
   return (
-    <main className="invitation">
+    <main
+      className={`invitation${scrollReady ? ' invitation--scrollable' : ''}`}
+    >
       <section
         className={`destination${
           phase !== 'waiting' ? ' destination--revealing' : ''
@@ -302,7 +342,23 @@ function App() {
             </div>
           ))}
         </div>
+
+        <button
+          className="destination__scroll-cue"
+          type="button"
+          onClick={scrollToInvitation}
+          tabIndex={scrollReady ? 0 : -1}
+          aria-hidden={!scrollReady}
+          aria-label="Scroll to the save the date invitation"
+        >
+          <span>Scroll to continue</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="m6 9 6 6 6-6" />
+          </svg>
+        </button>
       </section>
+
+      <SaveTheDate enabled={scrollReady} sectionRef={saveDateRef} />
 
       {phase !== 'open' ? (
         <section

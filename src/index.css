@@ -41,6 +41,13 @@ body,
   background: var(--ivory);
 }
 
+html.is-scroll-ready,
+html.is-scroll-ready body,
+html.is-scroll-ready #root {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
 body {
   min-height: 100svh;
 }
