@@ -3,6 +3,7 @@ import './App.css'
 import { Butterfly, type ButterflySpec } from './components/Butterfly'
 import { ForegroundStem } from './components/ForegroundStem'
 import { SaveTheDate } from './components/SaveTheDate'
+import { TheVibe } from './components/TheVibe'
 
 const TRANSITION_DURATION_MS = 4400
 const SCROLL_UNLOCK_DELAY_MS = 3000
@@ -359,6 +360,7 @@ function App() {
       </section>
 
       <SaveTheDate enabled={scrollReady} sectionRef={saveDateRef} />
+      <TheVibe enabled={scrollReady} />
 
       {phase !== 'open' ? (
         <section
