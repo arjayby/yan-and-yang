@@ -1,9 +1,10 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import './App.css'
 import { Butterfly, type ButterflySpec } from './components/Butterfly'
 import { ForegroundStem } from './components/ForegroundStem'
 
 const TRANSITION_DURATION_MS = 4400
+const FLORAL_ASSET_PATH = '/assets/watercolor-floral-border.webp'
 const MIN_DESKTOP_BUTTERFLIES = 256
 const MIN_MOBILE_BUTTERFLIES = 128
 const MAX_BUTTERFLIES = 384
@@ -202,12 +203,42 @@ type Phase = 'waiting' | 'departing' | 'open'
 
 function App() {
   const [phase, setPhase] = useState<Phase>('waiting')
+  const [assetsReady, setAssetsReady] = useState(false)
+  const destinationHeadingRef = useRef<HTMLHeadingElement>(null)
   const butterflies = useButterflyScatter()
 
   const openInvitation = useCallback(() => {
+    if (!assetsReady) return
+
     setPhase((currentPhase) =>
       currentPhase === 'waiting' ? 'departing' : currentPhase,
     )
+  }, [assetsReady])
+
+  useEffect(() => {
+    let cancelled = false
+    const floralImage = new Image()
+    const floralReady = new Promise<void>((resolve) => {
+      floralImage.onload = () => resolve()
+      floralImage.onerror = () => resolve()
+      floralImage.src = FLORAL_ASSET_PATH
+
+      if (floralImage.complete) resolve()
+    })
+    const fontsReady = document.fonts
+      ? Promise.all([
+          document.fonts.load('600 16px Montserrat'),
+          document.fonts.load('400 16px "Alex Brush"'),
+        ])
+      : Promise.resolve()
+
+    Promise.allSettled([floralReady, fontsReady]).then(() => {
+      if (!cancelled) setAssetsReady(true)
+    })
+
+    return () => {
+      cancelled = true
+    }
   }, [])
 
   useEffect(() => {
@@ -220,9 +251,58 @@ function App() {
     return () => window.clearTimeout(timer)
   }, [phase])
 
+  useEffect(() => {
+    if (phase !== 'open') return
+
+    const frame = window.requestAnimationFrame(() => {
+      destinationHeadingRef.current?.focus({ preventScroll: true })
+    })
+
+    return () => window.cancelAnimationFrame(frame)
+  }, [phase])
+
   return (
     <main className="invitation">
-      <section className="destination" aria-hidden={phase !== 'open'} />
+      <section
+        className={`destination${
+          phase !== 'waiting' ? ' destination--revealing' : ''
+        }${phase === 'open' ? ' destination--open' : ''}`}
+        aria-hidden={phase !== 'open'}
+        aria-label="Wedding invitation"
+      >
+        <div className="destination__paper" aria-hidden="true" />
+        <div className="destination__body" aria-hidden="true" />
+
+        <div className="destination__copy">
+          <h1
+            ref={destinationHeadingRef}
+            className="destination__heading"
+            tabIndex={-1}
+            aria-label="We decided on forever"
+          >
+            <span className="destination__eyebrow">We decided on</span>
+            <span className="destination__forever">forever</span>
+          </h1>
+        </div>
+
+        <div className="destination__florals" aria-hidden="true">
+          {(['left', 'center', 'right'] as const).map((group) => (
+            <div
+              className={`destination__floral-slice destination__floral-slice--${group}`}
+              key={group}
+            >
+              <img
+                className="destination__floral-image"
+                src={FLORAL_ASSET_PATH}
+                alt=""
+                width="1823"
+                height="863"
+                draggable="false"
+              />
+            </div>
+          ))}
+        </div>
+      </section>
 
       {phase !== 'open' ? (
         <section
@@ -262,8 +342,13 @@ function App() {
             className="open-button"
             type="button"
             onClick={openInvitation}
-            disabled={phase === 'departing'}
-            aria-label="Tap to open the wedding invitation"
+            disabled={!assetsReady || phase === 'departing'}
+            aria-busy={!assetsReady}
+            aria-label={
+              assetsReady
+                ? 'Tap to open the wedding invitation'
+                : 'Preparing the wedding invitation'
+            }
           >
             <span>Tap to open</span>
           </button>
