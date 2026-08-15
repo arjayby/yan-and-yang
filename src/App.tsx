@@ -4,6 +4,7 @@ import { Butterfly, type ButterflySpec } from './components/Butterfly'
 import { ForegroundStem } from './components/ForegroundStem'
 import { SaveTheDate } from './components/SaveTheDate'
 import { TheVibe } from './components/TheVibe'
+import { WeddingDetails } from './components/WeddingDetails'
 
 const TRANSITION_DURATION_MS = 6600
 const SCROLL_UNLOCK_DELAY_MS = 3000
@@ -402,6 +403,7 @@ function App() {
 
       <SaveTheDate enabled={scrollReady} sectionRef={saveDateRef} />
       <TheVibe enabled={scrollReady} />
+      <WeddingDetails enabled={scrollReady} />
 
       {phase !== 'open' ? (
         <section

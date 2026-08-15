@@ -18,7 +18,8 @@
 }
 
 .invitation--scrollable .save-date,
-.invitation--scrollable .the-vibe {
+.invitation--scrollable .the-vibe,
+.invitation--scrollable .wedding-details {
   visibility: visible;
 }
 
@@ -234,7 +235,8 @@
 }
 
 .save-date,
-.the-vibe {
+.the-vibe,
+.wedding-details {
   position: relative;
   z-index: 1;
   display: flex;
@@ -266,7 +268,8 @@
 }
 
 .save-date__card,
-.the-vibe__card {
+.the-vibe__card,
+.wedding-details__card {
   position: relative;
   width: min(100%, 786px);
   min-height: 100svh;
@@ -282,7 +285,8 @@
 }
 
 .save-date__paper,
-.the-vibe__paper {
+.the-vibe__paper,
+.wedding-details__paper {
   --save-date-grid: clamp(102px, 18vw, 180px);
 
   position: absolute;
@@ -795,6 +799,276 @@
   user-select: none;
 }
 
+.wedding-details__card {
+  color: #ed766d;
+}
+
+.wedding-details__panel {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  fill: #f6caa3;
+  filter: drop-shadow(0 -5px 7px rgb(84 72 73 / 9%));
+}
+
+.wedding-details__text-reveal {
+  --reveal-duration: 600ms;
+  --reveal-y: 19px;
+
+  position: absolute;
+  z-index: 3;
+  text-align: center;
+}
+
+.wedding-details__heading {
+  z-index: 5;
+  top: 10.4%;
+  left: 7.2%;
+}
+
+.wedding-details__heading h2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  color: #e96f68;
+  font-weight: 400;
+}
+
+.wedding-details__heading span:first-child {
+  font: 400 clamp(32px, 6.4vw, 52px) / 0.9 'Bodoni 72', Didot,
+    'Times New Roman', serif;
+}
+
+.wedding-details__heading span:last-child {
+  margin-top: -2px;
+  font: 400 clamp(44px, 8.6vw, 70px) / 0.72 'Alex Brush', cursive;
+}
+
+.wedding-details__gift,
+.wedding-details__share,
+.wedding-details__rsvp {
+  left: 4%;
+  width: 92%;
+}
+
+.wedding-details__gift {
+  top: 28.8%;
+}
+
+.wedding-details__share {
+  top: 46.6%;
+}
+
+.wedding-details__rsvp {
+  top: 64.4%;
+}
+
+.wedding-details__gift h3,
+.wedding-details__share h3,
+.wedding-details__rsvp h3 {
+  margin: 0;
+  font: italic 400 clamp(17px, 3.5vw, 28px) / 1.2 Georgia,
+    'Times New Roman', serif;
+  letter-spacing: 0.22em;
+}
+
+.wedding-details__gift p,
+.wedding-details__share p,
+.wedding-details__rsvp p {
+  margin: clamp(8px, 1.8vw, 15px) 0 0;
+  font: italic 400 clamp(13px, 2.7vw, 21px) / 1.42 Georgia,
+    'Times New Roman', serif;
+  letter-spacing: 0.03em;
+}
+
+.wedding-details__share .wedding-details__hashtag {
+  margin-top: clamp(10px, 2vw, 17px);
+  font: 600 clamp(18px, 3.4vw, 27px) / 1.2 Montserrat, sans-serif;
+  letter-spacing: 0.02em;
+}
+
+.wedding-details__rsvp p + p {
+  margin-top: clamp(15px, 3.1vw, 26px);
+}
+
+.wedding-details__seat {
+  display: inline-block;
+  min-width: 1.4em;
+  border-bottom: 1px solid currentColor;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.wedding-details__florals {
+  position: absolute;
+  z-index: 4;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.wedding-details__floral {
+  --reveal-duration: 1200ms;
+  --reveal-opacity-duration: 800ms;
+  --reveal-scale: 0.7;
+
+  position: absolute;
+}
+
+.wedding-details__floral > .reveal-item {
+  transform-origin: var(--reveal-origin, 50% 100%);
+}
+
+.wedding-details__floral img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transform: rotate(var(--asset-rotate, 0deg)) scaleX(var(--asset-flip, 1));
+  user-select: none;
+}
+
+.wedding-details__floral--ivory-flower-cluster {
+  --reveal-x: -28px;
+  --reveal-y: 12px;
+  --reveal-origin: 0% 55%;
+  --asset-rotate: -4deg;
+
+  top: 14.6%;
+  left: -4.5%;
+  width: 18%;
+}
+
+.wedding-details__floral--coral-blossom-branch {
+  --reveal-x: 36px;
+  --reveal-y: 13px;
+  --reveal-origin: 100% 70%;
+  --asset-rotate: 3deg;
+
+  top: 13.9%;
+  right: -12.5%;
+  width: 41%;
+}
+
+.wedding-details__floral--yellow-daisy {
+  --reveal-x: -30px;
+  --reveal-y: 18px;
+  --reveal-origin: 0% 82%;
+  --asset-rotate: 8deg;
+
+  top: 38.5%;
+  left: -5.5%;
+  width: 16%;
+}
+
+.wedding-details__floral--sage-leaf-sprig {
+  --reveal-x: 32px;
+  --reveal-y: 18px;
+  --reveal-origin: 100% 82%;
+  --asset-rotate: -3deg;
+
+  top: 39.1%;
+  right: -6%;
+  width: 16%;
+}
+
+.wedding-details__floral--golden-flower {
+  --reveal-x: -30px;
+  --reveal-y: 24px;
+  --reveal-origin: 0% 100%;
+  --asset-rotate: 4deg;
+
+  top: 78.2%;
+  left: -4.5%;
+  width: 19%;
+}
+
+.wedding-details__floral--yellow-wildflower {
+  --reveal-x: 34px;
+  --reveal-y: 24px;
+  --reveal-origin: 100% 100%;
+  --asset-rotate: -5deg;
+
+  top: 77.8%;
+  right: -7%;
+  width: 21%;
+}
+
+.wedding-details__butterfly {
+  --reveal-duration: 1100ms;
+  --reveal-opacity-duration: 750ms;
+  --reveal-scale: 0.72;
+  --reveal-y: 18px;
+
+  position: absolute;
+  z-index: 5;
+  width: 12.5%;
+  pointer-events: none;
+}
+
+.wedding-details__butterfly > .reveal-item {
+  transform-origin: 50% 70%;
+}
+
+.wedding-details__butterfly--top {
+  --reveal-x: 22px;
+
+  top: 16.2%;
+  left: 55.6%;
+}
+
+.wedding-details__butterfly--lower {
+  --reveal-x: -22px;
+
+  top: 60.4%;
+  left: 3.6%;
+  width: 12%;
+}
+
+.wedding-details__butterfly-float {
+  animation: the-vibe-butterfly-float 5.8s ease-in-out infinite;
+}
+
+.wedding-details__butterfly-art {
+  width: 100%;
+  aspect-ratio: 1;
+  transform-origin: center;
+  animation: the-vibe-wing-flutter 2.7s ease-in-out infinite;
+}
+
+.wedding-details__butterfly--top .wedding-details__butterfly-float {
+  animation-delay: -0.8s;
+}
+
+.wedding-details__butterfly--top .wedding-details__butterfly-art {
+  animation-delay: -0.35s;
+}
+
+.wedding-details__butterfly--lower .wedding-details__butterfly-float {
+  animation-delay: -3.4s;
+}
+
+.wedding-details__butterfly--lower .wedding-details__butterfly-art {
+  animation-delay: -1.65s;
+}
+
+.wedding-details__butterfly-art img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  user-select: none;
+}
+
+.wedding-details__butterfly--top img {
+  transform: rotate(-7deg);
+}
+
+.wedding-details__butterfly--lower img {
+  transform: rotate(11deg);
+}
+
 .opening {
   position: fixed;
   z-index: 1;
@@ -1252,7 +1526,8 @@
   }
 
   .save-date__card,
-  .the-vibe__card {
+  .the-vibe__card,
+  .wedding-details__card {
     box-shadow: none;
   }
 
@@ -1267,7 +1542,9 @@
 
 @media (prefers-reduced-motion: reduce) {
   .the-vibe__butterfly-float,
-  .the-vibe__butterfly-art {
+  .the-vibe__butterfly-art,
+  .wedding-details__butterfly-float,
+  .wedding-details__butterfly-art {
     animation: none;
   }
 }
