@@ -18,17 +18,17 @@ export function SaveTheDate({ enabled, sectionRef }: SaveTheDateProps) {
       aria-label="Save the date invitation"
       aria-hidden={!enabled}
     >
-      <article className="save-date__card">
-        <div className="save-date__paper" aria-hidden="true" />
-        <svg
-          className="save-date__panel"
-          viewBox="0 0 786 1122"
-          preserveAspectRatio="none"
-          aria-hidden="true"
-        >
-          <path d="M0 318C142 301 258 390 430 400C552 408 668 397 786 401V1122H0Z" />
-        </svg>
+      <div className="save-date__paper" aria-hidden="true" />
+      <svg
+        className="save-date__panel"
+        viewBox="0 0 786 1122"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+      >
+        <path d="M0 318C142 301 258 390 430 400C552 408 668 397 786 401V1122H0Z" />
+      </svg>
 
+      <article className="save-date__card">
         <InvitationFlorals enabled={enabled} />
 
         <ViewportReveal

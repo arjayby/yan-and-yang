@@ -76,17 +76,17 @@ export function WeddingDetails({ enabled }: WeddingDetailsProps) {
       aria-label="Wedding details"
       aria-hidden={!enabled}
     >
-      <article className="wedding-details__card">
-        <div className="wedding-details__paper" aria-hidden="true" />
-        <svg
-          className="wedding-details__panel"
-          viewBox="0 0 786 1122"
-          preserveAspectRatio="none"
-          aria-hidden="true"
-        >
-          <path d="M0 119C126 92 235 82 369 111C510 142 639 160 786 122V1122H0Z" />
-        </svg>
+      <div className="wedding-details__paper" aria-hidden="true" />
+      <svg
+        className="wedding-details__panel"
+        viewBox="0 0 786 1122"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+      >
+        <path d="M0 119C126 92 235 82 369 111C510 142 639 160 786 122V1122H0Z" />
+      </svg>
 
+      <article className="wedding-details__card">
         <div className="wedding-details__florals" aria-hidden="true">
           {FLORALS.map(({ className, delay, height, name, width }) => (
             <ViewportReveal

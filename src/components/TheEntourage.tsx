@@ -275,8 +275,9 @@ export function TheEntourage({ enabled }: TheEntourageProps) {
       aria-label="The entourage"
       aria-hidden={!enabled}
     >
+      <div className="entourage__paper" aria-hidden="true" />
+
       <article className="entourage__card">
-        <div className="entourage__paper" aria-hidden="true" />
         <Florals enabled={enabled} florals={FLORALS} />
 
         <div className="entourage__page entourage__page--first">

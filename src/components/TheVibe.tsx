@@ -21,17 +21,17 @@ export function TheVibe({ enabled }: TheVibeProps) {
       aria-label="Wedding attire guide"
       aria-hidden={!enabled}
     >
-      <article className="the-vibe__card">
-        <div className="the-vibe__paper" aria-hidden="true" />
-        <svg
-          className="the-vibe__panel"
-          viewBox="0 0 786 1122"
-          preserveAspectRatio="none"
-          aria-hidden="true"
-        >
-          <path d="M0 298C137 286 251 313 381 296C530 277 628 211 786 220V1122H0Z" />
-        </svg>
+      <div className="the-vibe__paper" aria-hidden="true" />
+      <svg
+        className="the-vibe__panel"
+        viewBox="0 0 786 1122"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+      >
+        <path d="M0 298C137 286 251 313 381 296C530 277 628 211 786 220V1122H0Z" />
+      </svg>
 
+      <article className="the-vibe__card">
         <ViewportReveal
           className="the-vibe__top-art"
           enabled={enabled}

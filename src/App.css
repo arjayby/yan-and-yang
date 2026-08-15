@@ -121,6 +121,13 @@
   pointer-events: none;
 }
 
+.destination__florals {
+  right: auto;
+  left: 50%;
+  width: min(100%, 786px);
+  transform: translateX(-50%);
+}
+
 .destination__floral-slice {
   overflow: hidden;
   opacity: 0;
@@ -146,7 +153,7 @@
   bottom: -1px;
   left: 50%;
   display: block;
-  width: 120vw;
+  width: 120%;
   max-width: none;
   height: auto;
   transform: translateX(-50%);
@@ -249,6 +256,7 @@
   min-height: 100svh;
   overflow: hidden;
   visibility: hidden;
+  isolation: isolate;
   background-color: #f4f3ef;
   background-image:
     radial-gradient(circle at 24% 18%, rgb(255 255 255 / 78%), transparent 34%),
@@ -276,13 +284,13 @@
 .wedding-details__card,
 .see-you-there__card {
   position: relative;
+  z-index: 2;
   width: min(100%, 786px);
   min-height: 100svh;
   overflow: hidden;
   isolation: isolate;
   aspect-ratio: 786 / 1122;
-  background: #f4f3ef;
-  box-shadow: 0 0 45px rgb(77 67 65 / 10%);
+  background: transparent;
 }
 
 .save-date__card {
@@ -1080,11 +1088,11 @@
 
 .entourage__card {
   position: relative;
+  z-index: 2;
   width: min(100%, 786px);
   overflow: hidden;
   isolation: isolate;
-  background: #d4d2a3;
-  box-shadow: 0 0 45px rgb(77 67 65 / 10%);
+  background: transparent;
 }
 
 .entourage__page {
@@ -1600,7 +1608,10 @@
 
 .see-you-there {
   color: #cf658d;
-  background: #f4f3ef;
+  background-color: #eb9b94;
+  background-image:
+    radial-gradient(circle at 23% 16%, rgb(255 255 255 / 5%), transparent 32%),
+    radial-gradient(circle at 76% 63%, rgb(177 65 87 / 4%), transparent 38%);
 }
 
 .see-you-there__card {
@@ -1610,11 +1621,7 @@
   overflow: hidden;
   isolation: isolate;
   aspect-ratio: 786 / 1122;
-  background-color: #eb9b94;
-  background-image:
-    radial-gradient(circle at 23% 16%, rgb(255 255 255 / 5%), transparent 32%),
-    radial-gradient(circle at 76% 63%, rgb(177 65 87 / 4%), transparent 38%);
-  box-shadow: 0 0 45px rgb(77 67 65 / 10%);
+  background: transparent;
 }
 
 .see-you-there__text-reveal {
@@ -2307,7 +2314,7 @@
   }
 
   .destination__floral-image {
-    width: 300vw;
+    width: 300%;
   }
 
   .destination__floral-slice--left .destination__floral-image {
@@ -2365,14 +2372,6 @@
     height: 104px;
   }
 
-  .save-date__card,
-  .the-vibe__card,
-  .wedding-details__card,
-  .entourage__card,
-  .see-you-there__card {
-    box-shadow: none;
-  }
-
   .save-date__message {
     width: 78%;
   }
@@ -2398,7 +2397,7 @@
 
 @media (min-aspect-ratio: 4 / 3) {
   .destination__floral-image {
-    width: 112vw;
+    width: 112%;
   }
 }
 
@@ -2422,7 +2421,7 @@
   }
 
   .destination__floral-image {
-    width: 115vw;
+    width: 115%;
   }
 
   .meadow__image {
