@@ -6,6 +6,8 @@
 }
 
 .invitation {
+  --opening-exit-delay: 6.2s;
+
   position: relative;
   overflow: hidden;
   background: var(--ivory);
@@ -90,16 +92,22 @@
 
 .destination__eyebrow {
   color: #d9789b;
+  opacity: 0;
+  transform: translate3d(0, 12px, 0);
   font: 600 clamp(14px, 2.3vw, 25px) / 1.25 Montserrat, sans-serif;
   letter-spacing: 0.105em;
   text-transform: uppercase;
+  will-change: transform, opacity;
 }
 
 .destination__forever {
   margin-top: clamp(14px, 3.2svh, 34px);
   color: #ef9b93;
+  opacity: 0;
+  transform: translate3d(0, 20px, 0);
   font: 400 clamp(120px, 34vw, 260px) / 0.76 'Alex Brush', cursive;
   white-space: nowrap;
+  will-change: transform, opacity;
 }
 
 .destination__florals,
@@ -112,6 +120,10 @@
 
 .destination__floral-slice {
   overflow: hidden;
+  opacity: 0;
+  transform: translate3d(0, 24px, 0) scale(0.96);
+  transform-origin: 50% 100%;
+  will-change: transform, opacity;
 }
 
 .destination__floral-slice--left {
@@ -188,6 +200,37 @@
   transform: translate3d(-50%, 0, 0);
   pointer-events: auto;
   animation: scroll-cue-float 2.4s ease-in-out 600ms infinite;
+}
+
+.destination--revealing .destination__floral-slice {
+  animation: destination-florals-in 900ms cubic-bezier(0.22, 0.76, 0.24, 1)
+    forwards;
+}
+
+.destination--revealing {
+  --destination-reveal-delay: 120ms;
+}
+
+.destination--revealing .destination__floral-slice--left {
+  animation-delay: var(--destination-reveal-delay);
+}
+
+.destination--revealing .destination__floral-slice--center {
+  animation-delay: calc(var(--destination-reveal-delay) + 90ms);
+}
+
+.destination--revealing .destination__floral-slice--right {
+  animation-delay: calc(var(--destination-reveal-delay) + 180ms);
+}
+
+.destination--revealing .destination__eyebrow {
+  animation: destination-copy-in 580ms cubic-bezier(0.22, 0.74, 0.25, 1)
+    calc(var(--destination-reveal-delay) + 700ms) forwards;
+}
+
+.destination--revealing .destination__forever {
+  animation: destination-copy-in 700ms cubic-bezier(0.2, 0.78, 0.22, 1)
+    calc(var(--destination-reveal-delay) + 1.4s) forwards;
 }
 
 .save-date,
@@ -924,7 +967,7 @@
 
 .opening--departing {
   pointer-events: none;
-  animation: opening-away 300ms ease 6.2s forwards;
+  animation: opening-away 300ms ease var(--opening-exit-delay) forwards;
 }
 
 .opening--departing .open-button {
@@ -1097,6 +1140,20 @@
 @keyframes opening-away {
   to {
     opacity: 0;
+  }
+}
+
+@keyframes destination-florals-in {
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes destination-copy-in {
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
   }
 }
 

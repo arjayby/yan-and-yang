@@ -346,7 +346,9 @@ function App() {
       className={`invitation${scrollReady ? ' invitation--scrollable' : ''}`}
     >
       <section
-        className={`destination${phase === 'open' ? ' destination--open' : ''}`}
+        className={`destination${
+          phase === 'open' ? ' destination--revealing' : ''
+        }${phase === 'open' ? ' destination--open' : ''}`}
         aria-hidden={phase !== 'open'}
         aria-label="Wedding invitation"
       >
