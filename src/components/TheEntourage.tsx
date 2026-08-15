@@ -161,6 +161,8 @@ const SECOND_FLORALS: EntourageFloral[] = [
   },
 ]
 
+const FLORALS = [...FIRST_FLORALS, ...SECOND_FLORALS]
+
 function TextReveal({
   children,
   className,
@@ -274,10 +276,10 @@ export function TheEntourage({ enabled }: TheEntourageProps) {
       aria-hidden={!enabled}
     >
       <article className="entourage__card">
-        <div className="entourage__page entourage__page--first">
-          <div className="entourage__paper" aria-hidden="true" />
-          <Florals enabled={enabled} florals={FIRST_FLORALS} />
+        <div className="entourage__paper" aria-hidden="true" />
+        <Florals enabled={enabled} florals={FLORALS} />
 
+        <div className="entourage__page entourage__page--first">
           <TextReveal
             className="entourage__heading"
             delay={150}
@@ -356,9 +358,6 @@ export function TheEntourage({ enabled }: TheEntourageProps) {
         </div>
 
         <div className="entourage__page entourage__page--second">
-          <div className="entourage__paper" aria-hidden="true" />
-          <Florals enabled={enabled} florals={SECOND_FLORALS} />
-
           <TextReveal
             className="entourage__secondary-heading"
             delay={150}

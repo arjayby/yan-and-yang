@@ -1088,10 +1088,7 @@
   position: relative;
   width: 100%;
   min-height: 100svh;
-  overflow: hidden;
-  isolation: isolate;
   aspect-ratio: 786 / 1122;
-  background: #d4d2a3;
 }
 
 .entourage__page--second {
@@ -1346,7 +1343,7 @@
 
 .entourage__florals {
   position: absolute;
-  z-index: 4;
+  z-index: 2;
   inset: 0;
   overflow: hidden;
   pointer-events: none;
@@ -1378,31 +1375,30 @@
   --reveal-origin: 0 0;
   --asset-rotate: 81deg;
 
-  top: -8.7%;
-  left: 2.5%;
-  width: 28%;
+  top: 0;
+  width: 23%;
 }
 
 .entourage__floral--first-coral-branch {
   --reveal-x: -34px;
   --reveal-y: 16px;
   --reveal-origin: 0 70%;
-  --asset-rotate: -7deg;
+  --asset-rotate: -270deg;
 
-  top: 37.7%;
-  left: -5.5%;
-  width: 18%;
+  top: 15%;
+  left: -5%;
+  width: 17%;
 }
 
 .entourage__floral--first-yellow-wildflower {
   --reveal-x: -30px;
   --reveal-y: 22px;
   --reveal-origin: 0 86%;
-  --asset-rotate: 11deg;
+  --asset-rotate: 40deg;
 
-  top: 72.6%;
-  left: -3.3%;
-  width: 14%;
+  top: 30%;
+  left: -3%;
+  width: 12%;
 }
 
 .entourage__floral--first-right-daisy {
@@ -1411,9 +1407,9 @@
   --reveal-origin: 100% 82%;
   --asset-rotate: -44deg;
 
-  top: 65.5%;
-  right: -7.2%;
-  width: 17%;
+  top: 7%;
+  right: -5.5%;
+  width: 14%;
 }
 
 .entourage__floral--first-bottom-flower {
@@ -1422,20 +1418,20 @@
   --reveal-origin: 0 100%;
   --asset-rotate: 6deg;
 
-  bottom: -10.5%;
-  left: -4.4%;
-  width: 22%;
+  top: 45%;
+  left: -4.5%;
+  width: 18%;
 }
 
 .entourage__floral--first-bottom-sprig {
-  --reveal-x: -24px;
+  --reveal-x: 24px;
   --reveal-y: 26px;
-  --reveal-origin: 0 100%;
-  --asset-rotate: 31deg;
+  --reveal-origin: 100% 100%;
+  --asset-rotate: -50deg;
 
-  bottom: -10%;
-  left: 10.5%;
-  width: 20%;
+  top: 19%;
+  right: -10%;
+  width: 17%;
 }
 
 .entourage__floral--first-right-branch {
@@ -1444,20 +1440,20 @@
   --reveal-origin: 100% 100%;
   --asset-rotate: -26deg;
 
-  right: -11%;
-  bottom: -2.4%;
-  width: 24%;
+  top: 29%;
+  right: -14.5%;
+  width: 20%;
 }
 
 .entourage__floral--second-top-daisy {
-  --reveal-x: -28px;
+  --reveal-x: 28px;
   --reveal-y: -4px;
-  --reveal-origin: 0 0;
-  --asset-rotate: 36deg;
+  --reveal-origin: 100% 0;
+  --asset-rotate: -45deg;
 
-  top: -5%;
-  left: 3.5%;
-  width: 17%;
+  top: 43%;
+  right: -10%;
+  width: 14%;
 }
 
 .entourage__floral--second-top-branch {
@@ -1466,42 +1462,42 @@
   --reveal-origin: 0 48%;
   --asset-rotate: 52deg;
 
-  top: 9.5%;
-  left: -13%;
-  width: 24%;
+  top: 60%;
+  left: -9.5%;
+  width: 20%;
 }
 
 .entourage__floral--second-right-bloom {
   --reveal-x: 34px;
   --reveal-y: 18px;
   --reveal-origin: 100% 70%;
-  --asset-rotate: 8deg;
+  --asset-rotate: -70deg;
 
-  top: 34.8%;
-  right: -7.5%;
-  width: 20%;
+  top: 58%;
+  right: -8%;
+  width: 18%;
 }
 
 .entourage__floral--second-left-wildflowers {
   --reveal-x: -34px;
   --reveal-y: 24px;
   --reveal-origin: 0 100%;
-  --asset-rotate: -12deg;
+  --asset-rotate: 22deg;
 
-  bottom: -1.8%;
-  left: -7.5%;
-  width: 23%;
+  top: 75%;
+  left: -5%;
+  width: 19%;
 }
 
 .entourage__floral--second-left-cluster {
-  --reveal-x: -32px;
+  --reveal-x: 32px;
   --reveal-y: 22px;
-  --reveal-origin: 0 90%;
-  --asset-rotate: 9deg;
+  --reveal-origin: 100% 90%;
+  --asset-rotate: 240deg;
 
-  bottom: 3.4%;
-  left: -5.5%;
-  width: 22%;
+  top: 72%;
+  right: -6%;
+  width: 20%;
 }
 
 .entourage__floral--second-left-daisy {
@@ -1510,9 +1506,9 @@
   --reveal-origin: 0 100%;
   --asset-rotate: 13deg;
 
-  bottom: -6.8%;
-  left: 7%;
-  width: 16%;
+  top: 91%;
+  left: -5.5%;
+  width: 14%;
 }
 
 .entourage__floral--second-right-sprig {
@@ -1521,9 +1517,9 @@
   --reveal-origin: 100% 100%;
   --asset-rotate: -35deg;
 
-  right: -5.5%;
-  bottom: -2.5%;
-  width: 22%;
+  top: 86%;
+  right: -8%;
+  width: 17%;
 }
 
 .entourage__butterfly {
@@ -2069,6 +2065,7 @@
   .save-date__details {
     width: 94%;
   }
+
 }
 
 @media (prefers-reduced-motion: reduce) {
