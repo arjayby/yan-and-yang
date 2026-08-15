@@ -3,6 +3,7 @@ import './App.css'
 import { Butterfly, type ButterflySpec } from './components/Butterfly'
 import { ForegroundStem } from './components/ForegroundStem'
 import { SaveTheDate } from './components/SaveTheDate'
+import { SeeYouThere } from './components/SeeYouThere'
 import { TheEntourage } from './components/TheEntourage'
 import { TheVibe } from './components/TheVibe'
 import { WeddingDetails } from './components/WeddingDetails'
@@ -406,6 +407,7 @@ function App() {
       <TheVibe enabled={scrollReady} />
       <WeddingDetails enabled={scrollReady} />
       <TheEntourage enabled={scrollReady} />
+      <SeeYouThere enabled={scrollReady} />
 
       {phase !== 'open' ? (
         <section

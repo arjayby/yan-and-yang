@@ -20,7 +20,8 @@
 .invitation--scrollable .save-date,
 .invitation--scrollable .the-vibe,
 .invitation--scrollable .wedding-details,
-.invitation--scrollable .entourage {
+.invitation--scrollable .entourage,
+.invitation--scrollable .see-you-there {
   visibility: visible;
 }
 
@@ -238,7 +239,8 @@
 .save-date,
 .the-vibe,
 .wedding-details,
-.entourage {
+.entourage,
+.see-you-there {
   position: relative;
   z-index: 1;
   display: flex;
@@ -271,7 +273,8 @@
 
 .save-date__card,
 .the-vibe__card,
-.wedding-details__card {
+.wedding-details__card,
+.see-you-there__card {
   position: relative;
   width: min(100%, 786px);
   min-height: 100svh;
@@ -1595,6 +1598,254 @@
   transform: rotate(13deg);
 }
 
+.see-you-there {
+  color: #cf658d;
+  background: #f4f3ef;
+}
+
+.see-you-there__card {
+  position: relative;
+  width: min(100%, 786px);
+  min-height: 100svh;
+  overflow: hidden;
+  isolation: isolate;
+  aspect-ratio: 786 / 1122;
+  background-color: #eb9b94;
+  background-image:
+    radial-gradient(circle at 23% 16%, rgb(255 255 255 / 5%), transparent 32%),
+    radial-gradient(circle at 76% 63%, rgb(177 65 87 / 4%), transparent 38%);
+  box-shadow: 0 0 45px rgb(77 67 65 / 10%);
+}
+
+.see-you-there__text-reveal {
+  --reveal-duration: 650ms;
+  --reveal-y: 19px;
+
+  position: absolute;
+  z-index: 3;
+  text-align: center;
+}
+
+.see-you-there__heading {
+  top: 2.5%;
+  right: 5.7%;
+}
+
+.see-you-there__heading h2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  color: #c95f8b;
+  font: 400 clamp(42px, 8.5vw, 69px) / 0.75 'Alex Brush', cursive;
+}
+
+.see-you-there__heading span:last-child {
+  margin-top: clamp(5px, 1vw, 9px);
+}
+
+.see-you-there__message {
+  top: 50%;
+  left: 50%;
+  width: 82%;
+  transform: translateY(-50%);
+}
+
+.see-you-there__message p {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  color: #a84f72;
+  transform: translateX(-50%);
+  font: italic 600 clamp(21px, 4.3vw, 36px) / 1.42 Georgia,
+    'Times New Roman', serif;
+  letter-spacing: 0.055em;
+}
+
+.see-you-there__florals,
+.see-you-there__butterflies {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.see-you-there__butterflies {
+  z-index: 4;
+}
+
+.see-you-there__floral {
+  --reveal-duration: 1200ms;
+  --reveal-opacity-duration: 800ms;
+  --reveal-scale: 0.7;
+
+  position: absolute;
+}
+
+.see-you-there__floral > .reveal-item {
+  transform-origin: var(--reveal-origin, 50% 100%);
+}
+
+.see-you-there__floral img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transform: rotate(var(--asset-rotate, 0deg)) scaleX(var(--asset-flip, 1));
+  user-select: none;
+}
+
+.see-you-there__floral--top-branch {
+  --reveal-x: -34px;
+  --reveal-y: -8px;
+  --reveal-origin: 0 0;
+  --asset-rotate: 86deg;
+
+  top: -23%;
+  left: -37%;
+  width: 75%;
+}
+
+.see-you-there__floral--left-cluster {
+  --reveal-x: -28px;
+  --reveal-y: 10px;
+  --reveal-origin: 0 55%;
+
+  top: 20.4%;
+  left: -5.5%;
+  width: 30%;
+}
+
+.see-you-there__floral--left-wildflowers {
+  --reveal-x: -34px;
+  --reveal-y: 20px;
+  --reveal-origin: 0 85%;
+  --asset-rotate: 10deg;
+
+  top: 58.2%;
+  left: -9%;
+  width: 25%;
+}
+
+.see-you-there__floral--right-golden-twig {
+  --reveal-x: 32px;
+  --reveal-y: 18px;
+  --reveal-origin: 100% 70%;
+  --asset-rotate: -32deg;
+
+  top: 35.6%;
+  right: -11%;
+  width: 20%;
+}
+
+.see-you-there__floral--right-sprig {
+  --reveal-x: 34px;
+  --reveal-y: 20px;
+  --reveal-origin: 100% 80%;
+  --asset-rotate: -18deg;
+
+  top: 60.8%;
+  right: -10%;
+  width: 32%;
+}
+
+.see-you-there__floral--bottom-branch {
+  --reveal-x: 32px;
+  --reveal-y: 26px;
+  --reveal-origin: 100% 100%;
+  --asset-rotate: -37deg;
+
+  right: -14%;
+  bottom: -8.5%;
+  width: 32%;
+}
+
+.see-you-there__floral--yellow-buttercup {
+  --reveal-x: -32px;
+  --reveal-y: 25px;
+  --reveal-origin: 0 100%;
+  --asset-rotate: 6deg;
+
+  bottom: -6%;
+  left: -4.5%;
+  width: 32%;
+}
+
+.see-you-there__floral--pink-clematis {
+  --reveal-x: 34px;
+  --reveal-y: 24px;
+  --reveal-origin: 100% 100%;
+  --asset-rotate: -11deg;
+
+  right: -3.5%;
+  bottom: -7.5%;
+  width: 22.5%;
+}
+
+.see-you-there__butterfly {
+  --reveal-duration: 900ms;
+  --reveal-opacity-duration: 650ms;
+  --reveal-scale: 0.72;
+  --reveal-y: 16px;
+
+  position: absolute;
+  width: 11.5%;
+}
+
+.see-you-there__butterfly--upper {
+  --reveal-x: 22px;
+
+  top: 25.8%;
+  right: 13.6%;
+}
+
+.see-you-there__butterfly--lower {
+  --reveal-x: -22px;
+
+  bottom: 14.2%;
+  left: 19.2%;
+  width: 10.8%;
+}
+
+.see-you-there__butterfly-flight,
+.see-you-there__butterfly-wings {
+  width: 100%;
+  aspect-ratio: 1;
+  transform-origin: center;
+}
+
+.see-you-there__butterfly .reveal-item--visible .see-you-there__butterfly-flight {
+  animation: closing-butterfly-upper-flight 13.5s cubic-bezier(0.42, 0, 0.58, 1) infinite;
+}
+
+.see-you-there__butterfly--lower .reveal-item--visible .see-you-there__butterfly-flight {
+  animation-name: closing-butterfly-lower-flight;
+  animation-duration: 15.8s;
+}
+
+.see-you-there__butterfly .reveal-item--visible .see-you-there__butterfly-wings {
+  animation: closing-butterfly-flutter 720ms ease-in-out infinite;
+}
+
+.see-you-there__butterfly--lower .see-you-there__butterfly-wings {
+  animation-delay: -310ms !important;
+}
+
+.see-you-there__butterfly img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  user-select: none;
+}
+
+.see-you-there__butterfly--upper img {
+  transform: rotate(-12deg);
+}
+
+.see-you-there__butterfly--lower img {
+  transform: rotate(10deg);
+}
+
 .opening {
   position: fixed;
   z-index: 1;
@@ -1987,6 +2238,69 @@
   }
 }
 
+@keyframes closing-butterfly-upper-flight {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(-4deg);
+  }
+  13% {
+    transform: translate3d(-18px, -12px, 0) rotate(-11deg);
+  }
+  29% {
+    transform: translate3d(-39px, 7px, 0) rotate(-3deg);
+  }
+  45% {
+    transform: translate3d(-26px, 28px, 0) rotate(8deg);
+  }
+  62% {
+    transform: translate3d(9px, 21px, 0) rotate(13deg);
+  }
+  79% {
+    transform: translate3d(24px, -8px, 0) rotate(3deg);
+  }
+  91% {
+    transform: translate3d(9px, -18px, 0) rotate(-5deg);
+  }
+}
+
+@keyframes closing-butterfly-lower-flight {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(5deg);
+  }
+  16% {
+    transform: translate3d(20px, -18px, 0) rotate(12deg);
+  }
+  33% {
+    transform: translate3d(38px, -7px, 0) rotate(4deg);
+  }
+  49% {
+    transform: translate3d(29px, 22px, 0) rotate(-7deg);
+  }
+  66% {
+    transform: translate3d(-7px, 29px, 0) rotate(-13deg);
+  }
+  82% {
+    transform: translate3d(-28px, 8px, 0) rotate(-4deg);
+  }
+  92% {
+    transform: translate3d(-18px, -10px, 0) rotate(4deg);
+  }
+}
+
+@keyframes closing-butterfly-flutter {
+  0%,
+  100% {
+    transform: scaleX(1) scaleY(1);
+  }
+  45% {
+    transform: scaleX(0.78) scaleY(1.035);
+  }
+  60% {
+    transform: scaleX(0.88) scaleY(1.015);
+  }
+}
+
 @media (max-width: 680px) {
   .destination__copy {
     width: 94vw;
@@ -2054,7 +2368,8 @@
   .save-date__card,
   .the-vibe__card,
   .wedding-details__card,
-  .entourage__card {
+  .entourage__card,
+  .see-you-there__card {
     box-shadow: none;
   }
 
@@ -2074,7 +2389,9 @@
   .wedding-details__butterfly-float,
   .wedding-details__butterfly-art,
   .entourage__butterfly-float,
-  .entourage__butterfly-art {
+  .entourage__butterfly-art,
+  .see-you-there__butterfly-flight,
+  .see-you-there__butterfly-wings {
     animation: none;
   }
 }
