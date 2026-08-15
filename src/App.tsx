@@ -5,7 +5,7 @@ import { ForegroundStem } from './components/ForegroundStem'
 import { SaveTheDate } from './components/SaveTheDate'
 import { TheVibe } from './components/TheVibe'
 
-const TRANSITION_DURATION_MS = 4400
+const TRANSITION_DURATION_MS = 6600
 const SCROLL_UNLOCK_DELAY_MS = 3000
 const FLORAL_ASSET_PATH = '/assets/watercolor-floral-border.webp'
 const MIN_DESKTOP_BUTTERFLIES = 256
@@ -14,6 +14,8 @@ const MAX_BUTTERFLIES = 384
 const BUTTERFLY_VARIANT_COUNT = 6
 const POSITION_CANDIDATE_COUNT = 32
 const FLOWER_TIP_RATIO = 0.2
+const MIN_DEPARTURE_DELAY_SECONDS = 0.18
+const DEPARTURE_DELAY_SPREAD_SECONDS = 1.65
 
 function createSeededRandom(seed: number) {
   let state = seed % 2147483647
@@ -70,37 +72,71 @@ function createRandomPosition(
   }
 }
 
-function createFlightPath(facing: number, random: () => number) {
-  const radians = (facing * Math.PI) / 180
+function createFlightPath(
+  position: { x: number; y: number },
+  width: number,
+  height: number,
+  random: () => number,
+) {
+  const offsetX = ((position.x - 50) / 100) * width
+  const offsetY = ((position.y - 50) / 100) * height
+  const outwardFacing = (Math.atan2(offsetX, -offsetY) * 180) / Math.PI
+  const flightFacing = outwardFacing + (random() - 0.5) * 6
+  const radians = (flightFacing * Math.PI) / 180
   const directionX = Math.sin(radians)
   const directionY = -Math.cos(radians)
   const perpendicularX = -directionY
   const perpendicularY = directionX
-  const distance = 130 + random() * 45
+  const distance = 140 + random() * 22
   const curveDirection = random() < 0.5 ? -1 : 1
-  const curve = curveDirection * (7 + random() * 11)
-  const firstDistance = distance * (0.25 + random() * 0.05)
-  const secondDistance = distance * (0.58 + random() * 0.07)
+  const curve = curveDirection * (3 + random() * 3)
+  const firstDistance = distance * (0.08 + random() * 0.02)
+  const secondDistance = distance * (0.34 + random() * 0.04)
 
   const point = (forward: number, sideways: number) => ({
     x: `${(directionX * forward + perpendicularX * sideways).toFixed(2)}vmax`,
     y: `${(directionY * forward + perpendicularY * sideways).toFixed(2)}vmax`,
   })
 
+  const lift = point(1.4, curve * 0.08)
   const first = point(firstDistance, curve)
   const second = point(secondDistance, curve * -0.65)
   const exit = point(distance, 0)
 
   return {
+    flightFacing,
+    flightX0: lift.x,
+    flightY0: lift.y,
     flightX1: first.x,
     flightY1: first.y,
     flightX2: second.x,
     flightY2: second.y,
     exitX: exit.x,
     exitY: exit.y,
-    flightBank: curveDirection * (7 + random() * 9),
-    flightDuration: 2.8 + random() * 0.7,
+    flightBank: curveDirection * (3 + random() * 3),
+    flightDuration: 3.9 + random() * 0.4,
   }
+}
+
+function getDepartureDelay(
+  position: { x: number; y: number },
+  width: number,
+  height: number,
+) {
+  const distanceFromCenter = Math.hypot(
+    ((position.x - 50) / 100) * width,
+    ((position.y - 50) / 100) * height,
+  )
+  const distanceToCorner = Math.hypot(width / 2, height / 2)
+  const normalizedDistance = Math.min(
+    distanceFromCenter / distanceToCorner,
+    1,
+  )
+
+  return (
+    MIN_DEPARTURE_DELAY_SECONDS +
+    normalizedDistance * DEPARTURE_DELAY_SPREAD_SECONDS
+  )
 }
 
 function createShuffledVariants(count: number, random: () => number) {
@@ -148,8 +184,13 @@ function createButterflyScatter(width: number, height: number, seed: number) {
       placement,
     )
     positions.push(position)
-    const facing = Math.round(detailRandom() * 359)
-    const flightPath = createFlightPath(facing, detailRandom)
+    const flightPath = createFlightPath(
+      position,
+      width,
+      height,
+      detailRandom,
+    )
+    const facing = flightPath.flightFacing + (detailRandom() - 0.5) * 30
 
     return {
       x: position.x,
@@ -162,7 +203,7 @@ function createButterflyScatter(width: number, height: number, seed: number) {
       driftDelay: -(detailRandom() * 5.8),
       flapDelay: -(detailRandom() * 1.4),
       ...flightPath,
-      delay: 0.1 + detailRandom() * 0.65,
+      departureDelay: getDepartureDelay(position, width, height),
     }
   })
 }
@@ -305,9 +346,7 @@ function App() {
       className={`invitation${scrollReady ? ' invitation--scrollable' : ''}`}
     >
       <section
-        className={`destination${
-          phase !== 'waiting' ? ' destination--revealing' : ''
-        }${phase === 'open' ? ' destination--open' : ''}`}
+        className={`destination${phase === 'open' ? ' destination--open' : ''}`}
         aria-hidden={phase !== 'open'}
         aria-label="Wedding invitation"
       >

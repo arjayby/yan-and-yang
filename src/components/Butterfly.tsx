@@ -10,6 +10,9 @@ export interface ButterflySpec {
   driftY: number
   driftDelay: number
   flapDelay: number
+  flightFacing: number
+  flightX0: string
+  flightY0: string
   flightX1: string
   flightY1: string
   flightX2: string
@@ -18,7 +21,7 @@ export interface ButterflySpec {
   exitY: string
   flightBank: number
   flightDuration: number
-  delay: number
+  departureDelay: number
 }
 
 interface ButterflyProps {
@@ -128,6 +131,9 @@ export const Butterfly = memo(function Butterfly({ index, spec }: ButterflyProps
     '--drift-delay': `${spec.driftDelay}s`,
     '--flap-speed': `${0.56 + (index % 4) * 0.055}s`,
     '--flap-delay': `${spec.flapDelay}s`,
+    '--flight-facing': `${spec.flightFacing}deg`,
+    '--flight-x-0': spec.flightX0,
+    '--flight-y-0': spec.flightY0,
     '--flight-x-1': spec.flightX1,
     '--flight-y-1': spec.flightY1,
     '--flight-x-2': spec.flightX2,
@@ -136,7 +142,7 @@ export const Butterfly = memo(function Butterfly({ index, spec }: ButterflyProps
     '--exit-y': spec.exitY,
     '--flight-bank': `${spec.flightBank}deg`,
     '--flight-duration': `${spec.flightDuration}s`,
-    '--exit-delay': `${spec.delay}s`,
+    '--exit-delay': `${spec.departureDelay}s`,
   } as CSSProperties
 
   const wing = (
