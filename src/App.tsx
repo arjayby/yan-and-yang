@@ -76,15 +76,10 @@ function createRandomPosition(
 }
 
 function createFlightPath(
-  position: { x: number; y: number },
-  width: number,
-  height: number,
+  facing: number,
   random: () => number,
 ) {
-  const offsetX = ((position.x - 50) / 100) * width
-  const offsetY = ((position.y - 50) / 100) * height
-  const outwardFacing = (Math.atan2(offsetX, -offsetY) * 180) / Math.PI
-  const flightFacing = outwardFacing + (random() - 0.5) * 6
+  const flightFacing = facing
   const radians = (flightFacing * Math.PI) / 180
   const directionX = Math.sin(radians)
   const directionY = -Math.cos(radians)
@@ -187,13 +182,8 @@ function createButterflyScatter(width: number, height: number, seed: number) {
       placement,
     )
     positions.push(position)
-    const flightPath = createFlightPath(
-      position,
-      width,
-      height,
-      detailRandom,
-    )
-    const facing = flightPath.flightFacing + (detailRandom() - 0.5) * 30
+    const facing = detailRandom() * 360
+    const flightPath = createFlightPath(facing, detailRandom)
 
     return {
       x: position.x,
